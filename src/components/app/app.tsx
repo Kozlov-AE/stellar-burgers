@@ -25,7 +25,8 @@ const App = () => {
   const location = useLocation();
   const dispatch = useDispatch();
 
-  const backgroundLocation = location.state;
+  const locationState = location.state as {background: Location};
+  const backgroundLocation = locationState && location.state?.background;
 
   useEffect(() => {
     dispatch(checkUserAuth());
