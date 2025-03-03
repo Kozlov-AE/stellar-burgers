@@ -34,11 +34,6 @@ export const getOrders = createAsyncThunk(
   async () => await getOrdersApi()
 );
 
-export const toOrder = createAsyncThunk(
-  'orders/toOrder',
-  async (order: TOrder) => await orderBurgerApi(order.ingredients)
-);
-
 export const getFeeds = createAsyncThunk(
   'orders/feeds',
   async () => await getFeedsApi()
@@ -78,21 +73,6 @@ const ordersSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.allOrders = action.payload;
-      })
-
-      .addCase(toOrder.pending, (state) => {
-        state.isLoading = true;
-        state.error = null;
-      })
-      .addCase(toOrder.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error =
-          action.error.message || 'Ошибка при получении заказа по номеру';
-      })
-      .addCase(toOrder.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.error = null;
-        state.orderByNumber = action.payload.order;
       })
 
       .addCase(getFeeds.pending, (state) => {

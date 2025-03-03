@@ -7,8 +7,10 @@ import { useSelector } from '../../services/store';
 
 export const IngredientDetails: FC = () => {
   const params = useParams();
-  
-  const ingredientData = useSelector(ingredientsSelectors.getIngredients).find(x => x._id === params.id)
+
+  const ingredientData = useSelector(ingredientsSelectors.getIngredients).find(
+    (x) => x._id === params.id
+  );
   console.log(ingredientData);
 
   if (!ingredientData) {

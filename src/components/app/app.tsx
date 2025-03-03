@@ -25,7 +25,7 @@ const App = () => {
   const location = useLocation();
   const dispatch = useDispatch();
 
-  const locationState = location.state as {background: Location};
+  const locationState = location.state as { background: Location };
   const backgroundLocation = locationState && location.state?.background;
 
   useEffect(() => {
@@ -88,7 +88,7 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-        </Routes>
+      </Routes>
       <Routes>
         <Route
           path='/ingredients/:id'
