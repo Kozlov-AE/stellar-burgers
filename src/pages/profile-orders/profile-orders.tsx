@@ -8,7 +8,8 @@ export const ProfileOrders: FC = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getOrders());
-  }, []);
+  }, [dispatch]);
+
   const orders: TOrder[] = useSelector(ordersSelectors.selectAllOrders);
 
   return <ProfileOrdersUI orders={orders} />;

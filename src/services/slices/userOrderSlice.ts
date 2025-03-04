@@ -63,7 +63,11 @@ const userOrderSlice = createSlice({
       }
     },
     clearOrder(state) {
-      state = initialState;
+      state.constructorItems = {
+        bun: null,
+        ingredients: []
+      };
+      state.userOrder = null;
     }
   },
   extraReducers: (builder) => {

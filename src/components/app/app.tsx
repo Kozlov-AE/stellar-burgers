@@ -25,8 +25,7 @@ const App = () => {
   const location = useLocation();
   const dispatch = useDispatch();
 
-  const locationState = location.state as { background: Location };
-  const backgroundLocation = locationState && location.state?.background;
+  const background = location.state && location.state?.background;
 
   useEffect(() => {
     dispatch(checkUserAuth());
@@ -37,7 +36,7 @@ const App = () => {
   return (
     <div className={styles.app}>
       <AppHeader />
-      <Routes location={backgroundLocation || location}>
+      <Routes location={background || location}>
         <Route path='/' element={<ConstructorPage />} />
         <Route path='/feed' element={<Feed />} />
         <Route
