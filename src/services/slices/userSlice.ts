@@ -7,10 +7,12 @@ import {
   loginUserApi,
   registerUserApi,
   updateUserApi,
-  getUserApi
+  getUserApi,
+  logoutApi
 } from '@api';
 
-import { setCookie } from '../../utils/cookie';
+import { deleteCookie, setCookie } from '../../utils/cookie';
+import { act } from 'react-dom/test-utils';
 
 export const registerUser = createAsyncThunk(
   'user/registerUser',
@@ -47,6 +49,20 @@ export const updateUser = createAsyncThunk(
     await updateUserApi({ email, name })
 );
 
+export const logoutUser = createAsyncThunk(
+  'user/logout',
+  async (_, { rejectWithValue }) => {
+    try {
+      await logoutApi();
+      deleteCookie('accessToken'); // очищаем accessToken
+      console.log('Происходит logoutUser в слайсе');
+    } catch (error) {
+      console.log('Ошибка выполнения выхода');
+      return rejectWithValue(error);
+    }
+  }
+);
+
 type TUserState = {
   data: TUser | null;
   isAuthChecked: boolean; // флаг для статуса проверки токена пользователя
@@ -67,9 +83,9 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    // setAuthCheck: (state) => {
-    //   state.isAuthChecked = true;
-    // }
+    userLogout: () => {
+      return initialState;
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -144,6 +160,18 @@ const userSlice = createSlice({
         state.loginUserRequest = false;
         state.isAuthenticated = true;
         state.isAuthChecked = true;
+      })
+
+      .addCase(logoutUser.pending, (state) => {
+        state.loginUserRequest;
+      })
+      .addCase(logoutUser.rejected, (state, action) => {
+        state.loginUserRequest = false;
+        state.loginUserError =
+          action.error.message || 'Ошибка выхода из профиля';
+      })
+      .addCase(logoutUser.fulfilled, (state) => {
+        return initialState;
       });
   },
   selectors: {
@@ -158,3 +186,6 @@ const userSlice = createSlice({
 export const userSelectors = userSlice.selectors;
 
 export default userSlice;
+function userLogout(): any {
+  throw new Error('Function not implemented.');
+}

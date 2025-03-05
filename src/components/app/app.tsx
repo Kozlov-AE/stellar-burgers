@@ -2,7 +2,7 @@ import '../../index.css';
 import styles from './app.module.css';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 
-import { AppHeader, IngredientDetails, Modal } from '@components';
+import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
 import {
   ConstructorPage,
   Feed,
@@ -26,6 +26,8 @@ const App = () => {
   const dispatch = useDispatch();
 
   const background = location.state && location.state?.background;
+
+  const closeModal = () => navigate(-1);
 
   useEffect(() => {
     dispatch(checkUserAuth());
@@ -92,8 +94,26 @@ const App = () => {
         <Route
           path='/ingredients/:id'
           element={
-            <Modal title={'детали ингридиента'} onClose={() => navigate(-1)}>
+            <Modal title={'детали ингридиента'} onClose={closeModal}>
               <IngredientDetails />
+            </Modal>
+          }
+        />
+        <Route
+          path='/profile/orders/:id'
+          element={
+            <ProtectedRoute>
+              <Modal title={'детали заказа'} onClose={closeModal}>
+                <OrderInfo />
+              </Modal>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/feed/:id'
+          element={
+            <Modal title={'детали заказа'} onClose={closeModal}>
+              <OrderInfo />
             </Modal>
           }
         />

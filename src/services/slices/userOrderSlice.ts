@@ -40,9 +40,6 @@ const userOrderSlice = createSlice({
   reducers: {
     addIngridient(state, action: PayloadAction<TIngredient>) {
       if (action.payload.type === 'bun') {
-        if (state.constructorItems.bun) {
-          return;
-        }
         state.constructorItems.bun = action.payload;
       } else {
         const id = nanoid();
@@ -62,13 +59,13 @@ const userOrderSlice = createSlice({
           );
       }
     },
-    moveUp(state, action: PayloadAction<number>){
+    moveUp(state, action: PayloadAction<number>) {
       const tmp = state.constructorItems.ingredients[action.payload];
       state.constructorItems.ingredients[action.payload] =
         state.constructorItems.ingredients[action.payload - 1];
       state.constructorItems.ingredients[action.payload - 1] = tmp;
     },
-    moveDown(state, action: PayloadAction<number>){
+    moveDown(state, action: PayloadAction<number>) {
       const tmp = state.constructorItems.ingredients[action.payload];
       state.constructorItems.ingredients[action.payload] =
         state.constructorItems.ingredients[action.payload + 1];

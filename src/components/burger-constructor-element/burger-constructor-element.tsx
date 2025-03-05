@@ -15,7 +15,9 @@ export const BurgerConstructorElement: FC<BurgerConstructorElementProps> = memo(
       dispatch(userOrderActions.moveUp(index));
     };
 
-    const handleClose = () => {};
+    const handleDelete = () => {
+      dispatch(userOrderActions.removeIngridient(ingredient));
+    };
 
     return (
       <BurgerConstructorElementUI
@@ -24,7 +26,7 @@ export const BurgerConstructorElement: FC<BurgerConstructorElementProps> = memo(
         totalItems={totalItems}
         handleMoveUp={handleMoveUp}
         handleMoveDown={handleMoveDown}
-        handleClose={handleClose}
+        handleClose={handleDelete}
       />
     );
   }
