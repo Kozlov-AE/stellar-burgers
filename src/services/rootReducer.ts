@@ -9,5 +9,4 @@ export const rootReducer = combineReducers({
   [ingredientsSlice.name]: ingredientsSlice.reducer,
   [ordersSlice.name]: ordersSlice.reducer,
   [userOrderSlice.name]: userOrderSlice.reducer
-  // Здесь будут остальные редьюсеры
 });

@@ -62,6 +62,18 @@ const userOrderSlice = createSlice({
           );
       }
     },
+    moveUp(state, action: PayloadAction<number>){
+      const tmp = state.constructorItems.ingredients[action.payload];
+      state.constructorItems.ingredients[action.payload] =
+        state.constructorItems.ingredients[action.payload - 1];
+      state.constructorItems.ingredients[action.payload - 1] = tmp;
+    },
+    moveDown(state, action: PayloadAction<number>){
+      const tmp = state.constructorItems.ingredients[action.payload];
+      state.constructorItems.ingredients[action.payload] =
+        state.constructorItems.ingredients[action.payload + 1];
+      state.constructorItems.ingredients[action.payload + 1] = tmp;
+    },
     clearOrder(state) {
       state.constructorItems = {
         bun: null,
