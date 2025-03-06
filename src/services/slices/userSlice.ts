@@ -171,7 +171,11 @@ const userSlice = createSlice({
           action.error.message || 'Ошибка выхода из профиля';
       })
       .addCase(logoutUser.fulfilled, (state) => {
-        return initialState;
+        state.data = null;
+        state.loginUserError = null;
+        state.loginUserRequest = false;
+        state.isAuthenticated = false;
+        state.isAuthChecked = true;
       });
   },
   selectors: {

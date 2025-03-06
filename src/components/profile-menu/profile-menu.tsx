@@ -9,8 +9,6 @@ export const ProfileMenu: FC = () => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    console.log('Нажал на логаут!');
-
     dispatch(logoutUser());
   };
 
