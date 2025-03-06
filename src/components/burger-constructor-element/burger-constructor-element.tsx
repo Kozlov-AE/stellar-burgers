@@ -16,7 +16,7 @@ export const BurgerConstructorElement: FC<BurgerConstructorElementProps> = memo(
     };
 
     const handleDelete = () => {
-      dispatch(userOrderActions.removeIngridient(ingredient));
+      dispatch(userOrderActions.removeIngredient(ingredient));
     };
 
     return (

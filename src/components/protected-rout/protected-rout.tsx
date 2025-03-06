@@ -15,22 +15,20 @@ function ProtectedRoute({ children, onlyUnAuth }: ProtectedRouteProps) {
   const isAuthChecked = useSelector(userSelectors.isAuthChecked);
 
   if (!isAuthChecked) {
-    console.log('WAIT USER CHECKOUT');
     return <Preloader />;
   }
 
   if (onlyUnAuth && user) {
-    console.log('NAVIGATE FROM LOGIN TO INDEX');
-    const background = location.state?.background || { pathname: '/' };
+    // const background = location.state?.background || { pathname: '/' };
+    const background = location.state?.from || { pathname: '/' };
     return <Navigate replace to={background} />;
   }
 
   if (!onlyUnAuth && !user) {
-    console.log('NAVIGATE FROM PAGE TO LOGIN');
     return (
       <Navigate
         replace
-        to={'/login'}
+        to='/login'
         state={{
           from: {
             ...location,
@@ -41,8 +39,6 @@ function ProtectedRoute({ children, onlyUnAuth }: ProtectedRouteProps) {
       />
     );
   }
-
-  console.log('RENDER COMPONENT');
 
   return children;
 }

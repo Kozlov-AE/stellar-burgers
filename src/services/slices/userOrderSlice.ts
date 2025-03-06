@@ -38,7 +38,7 @@ const userOrderSlice = createSlice({
   name: 'userOrder',
   initialState,
   reducers: {
-    addIngridient(state, action: PayloadAction<TIngredient>) {
+    addIngredient(state, action: PayloadAction<TIngredient>) {
       if (action.payload.type === 'bun') {
         state.constructorItems.bun = action.payload;
       } else {
@@ -49,7 +49,7 @@ const userOrderSlice = createSlice({
         });
       }
     },
-    removeIngridient(state, action: PayloadAction<TConstructorIngredient>) {
+    removeIngredient(state, action: PayloadAction<TConstructorIngredient>) {
       if (action.payload.type === 'bun') {
         state.constructorItems.bun = null;
       } else {

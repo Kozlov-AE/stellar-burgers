@@ -55,9 +55,7 @@ export const logoutUser = createAsyncThunk(
     try {
       await logoutApi();
       deleteCookie('accessToken'); // очищаем accessToken
-      console.log('Происходит logoutUser в слайсе');
     } catch (error) {
-      console.log('Ошибка выполнения выхода');
       return rejectWithValue(error);
     }
   }

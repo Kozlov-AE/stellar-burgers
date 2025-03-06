@@ -25,10 +25,6 @@ export const Login: FC = () => {
     dispatch(loginUser(loginData));
   };
 
-  if (isAuthenticated) {
-    return <Navigate to={'/'} />;
-  }
-
   return (
     <LoginUI
       errorText=''
