@@ -9,7 +9,7 @@ import {
   updateUserApi,
   getUserApi,
   logoutApi
-} from '@api';
+} from '../../utils/burger-api';
 
 import { deleteCookie, setCookie } from '../../utils/cookie';
 import { act } from 'react-dom/test-utils';

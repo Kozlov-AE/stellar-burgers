@@ -1,0 +1,88 @@
+import userOrderSlice, { userOrderActions } from './userOrderSlice';
+
+const initialState = {
+  constructorItems: {
+    bun: null,
+    ingredients: []
+  },
+  userOrder: null,
+  isLoading: false,
+  error: null
+};
+
+const ing1 = {
+  _id: 'qwe1',
+  name: 'ingr1',
+  type: 'bun',
+  proteins: 10,
+  fat: 20,
+  carbohydrates: 30,
+  calories: 100,
+  price: 100,
+  image: 'image1.jpg',
+  image_large: 'image1.jpg',
+  image_mobile: 'image1.jpg'
+};
+
+const ing2 = {
+  _id: 'qwe2',
+  id: 'qwe2',
+  name: 'ingr2',
+  type: 'main',
+  proteins: 15,
+  fat: 25,
+  carbohydrates: 35,
+  calories: 50,
+  price: 1050,
+  image: 'image2.jpg',
+  image_large: 'image2.jpg',
+  image_mobile: 'image2.jpg'
+};
+
+const ing3 = {
+  _id: 'qwe3',
+  id: 'qwe3',
+  name: 'ingr3',
+  type: 'main',
+  proteins: 18,
+  fat: 43,
+  carbohydrates: 25,
+  calories: 50,
+  price: 150,
+  image: 'image3.jpg',
+  image_large: 'image3.jpg',
+  image_mobile: 'image3.jpg'
+};
+
+const notEmptyState = {
+  constructorItems: {
+    bun: ing1,
+    ingredients: [ing2, ing3]
+  },
+  userOrder: null,
+  isLoading: false,
+  error: null
+};
+
+describe('userOrderSlice', () => {
+  it('добавляет ингредиент', () => {
+    const action = userOrderActions.addIngredient(ing1);
+    const newState = userOrderSlice.reducer(initialState, action);
+
+    expect(newState.constructorItems.bun).toEqual(ing1);
+  });
+
+  it('удаляет ингредиент', () => {
+    const action = userOrderActions.removeIngredient(ing2);
+    const newState = userOrderSlice.reducer(notEmptyState, action);
+
+    expect(newState.constructorItems.ingredients).toHaveLength(1);
+  });
+
+  it('изменяет порядок ингредиентов', () => {
+    const action = userOrderActions.moveUp(1);
+    const newState = userOrderSlice.reducer(notEmptyState, action);
+
+    expect(newState.constructorItems.ingredients).toEqual([ing3, ing2]);
+  });
+});

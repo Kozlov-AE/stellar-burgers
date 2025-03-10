@@ -3,9 +3,8 @@ import { TOrder } from '@utils-types';
 import {
   getOrderByNumberApi,
   getOrdersApi,
-  orderBurgerApi,
   getFeedsApi
-} from '@api';
+} from '../../utils/burger-api';
 import { TFeed } from '../../components/ui/feed-info/type';
 
 type TOrderState = {
