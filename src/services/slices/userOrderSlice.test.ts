@@ -65,22 +65,29 @@ const notEmptyState = {
 };
 
 describe('userOrderSlice', () => {
-  it('добавляет ингредиент', () => {
+  it('addIngredient', () => {
     const action = userOrderActions.addIngredient(ing1);
     const newState = userOrderSlice.reducer(initialState, action);
 
     expect(newState.constructorItems.bun).toEqual(ing1);
   });
 
-  it('удаляет ингредиент', () => {
+  it('removeIngredient', () => {
     const action = userOrderActions.removeIngredient(ing2);
     const newState = userOrderSlice.reducer(notEmptyState, action);
 
     expect(newState.constructorItems.ingredients).toHaveLength(1);
   });
 
-  it('изменяет порядок ингредиентов', () => {
+  it('moveUp', () => {
     const action = userOrderActions.moveUp(1);
+    const newState = userOrderSlice.reducer(notEmptyState, action);
+
+    expect(newState.constructorItems.ingredients).toEqual([ing3, ing2]);
+  });
+
+  it('moveDown', () => {
+    const action = userOrderActions.moveDown(0);
     const newState = userOrderSlice.reducer(notEmptyState, action);
 
     expect(newState.constructorItems.ingredients).toEqual([ing3, ing2]);

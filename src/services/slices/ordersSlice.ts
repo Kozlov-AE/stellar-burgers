@@ -7,7 +7,7 @@ import {
 } from '../../utils/burger-api';
 import { TFeed } from '../../components/ui/feed-info/type';
 
-type TOrderState = {
+export type TOrderState = {
   orderByNumber: TOrder | null;
   allOrders: TOrder[];
   feed: TFeed;
