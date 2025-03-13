@@ -4,7 +4,10 @@ describe('тестирование открытия модальных окон'
     cy.visit('/');
   });
   it('открытие модального окна деталей ингридиента', function () {
+    cy.get('[data-cy="modal"]').should('not.exist');
+
     cy.get('[data-cy="bun"]').contains('Краторная булка N-200i').click();
+
     cy.get('[data-cy="modal"]')
       .contains('Краторная булка N-200i')
       .should('exist');
@@ -18,6 +21,8 @@ describe('тестирование закрытия модальных окон'
   });
 
   it('закрытие модального окна деталей ингридиента по клику на крестик', function () {
+    cy.get('[data-cy="modal"]').should('not.exist');
+
     cy.get('[data-cy="bun"]').contains('Краторная булка N-200i').click();
 
     cy.get('[data-cy="modal"]')
@@ -30,6 +35,8 @@ describe('тестирование закрытия модальных окон'
   });
 
   it('закрытие модального окна деталей ингридиента по клику на оверлей', function () {
+    cy.get('[data-cy="modal"]').should('not.exist');
+
     cy.get('[data-cy="bun"]').contains('Краторная булка N-200i').click();
 
     cy.get('[data-cy="modal"]')

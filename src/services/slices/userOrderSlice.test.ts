@@ -1,4 +1,11 @@
 import userOrderSlice, { userOrderActions } from './userOrderSlice';
+// import { expect, jest, test } from '@jest/globals';
+import { nanoid } from '@reduxjs/toolkit';
+
+jest.mock('@reduxjs/toolkit', () => ({
+  ...jest.requireActual('@reduxjs/toolkit'),
+  nanoid: () => 'mocked-id'
+}));
 
 const initialState = {
   constructorItems: {
@@ -12,6 +19,7 @@ const initialState = {
 
 const ing1 = {
   _id: 'qwe1',
+  id: 'mocked-id',
   name: 'ingr1',
   type: 'bun',
   proteins: 10,
@@ -26,7 +34,7 @@ const ing1 = {
 
 const ing2 = {
   _id: 'qwe2',
-  id: 'qwe2',
+  id: 'mocked-id',
   name: 'ingr2',
   type: 'main',
   proteins: 15,
@@ -41,7 +49,7 @@ const ing2 = {
 
 const ing3 = {
   _id: 'qwe3',
-  id: 'qwe3',
+  id: 'ingr3',
   name: 'ingr3',
   type: 'main',
   proteins: 18,

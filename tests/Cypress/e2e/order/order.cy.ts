@@ -12,6 +12,11 @@ describe('тестирование создания и отправки зака
     );
   });
 
+  this.afterEach(function () {
+    cy.clearCookie('accessToken');
+    window.localStorage.removeItem('refreshToken');
+  });
+
   it('создание и отправка заказа', function () {
     cy.get('[data-cy=bun]').contains('Добавить').click();
     cy.get('[data-cy=main]').contains('Добавить').click();

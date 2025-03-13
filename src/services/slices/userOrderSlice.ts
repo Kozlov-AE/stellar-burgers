@@ -1,4 +1,3 @@
-import { orderBurgerApi } from '../../utils/burger-api';
 import {
   createAsyncThunk,
   createSlice,
@@ -11,6 +10,7 @@ import {
   TIngredient,
   TOrder
 } from '@utils-types';
+import { orderBurgerApi } from '../../utils/burger-api';
 
 type TUserOrder = {
   constructorItems: TConstructorItems;
@@ -38,16 +38,17 @@ const userOrderSlice = createSlice({
   name: 'userOrder',
   initialState,
   reducers: {
-    addIngredient(state, action: PayloadAction<TIngredient>) {
-      if (action.payload.type === 'bun') {
-        state.constructorItems.bun = action.payload;
-      } else {
-        const id = nanoid();
-        state.constructorItems.ingredients.push({
-          ...action.payload,
-          id
-        });
-      }
+    addIngredient: {
+      reducer: (state, action: PayloadAction<TConstructorIngredient>) => {
+        if (action.payload.type === 'bun') {
+          state.constructorItems.bun = action.payload as TIngredient;
+        } else {
+          state.constructorItems.ingredients.push(action.payload);
+        }
+      },
+      prepare: (ingredient: TIngredient) => ({
+        payload: { ...ingredient, id: nanoid() }
+      })
     },
     removeIngredient(state, action: PayloadAction<TConstructorIngredient>) {
       if (action.payload.type === 'bun') {
@@ -72,10 +73,6 @@ const userOrderSlice = createSlice({
       state.constructorItems.ingredients[action.payload + 1] = tmp;
     },
     clearOrder(state) {
-      state.constructorItems = {
-        bun: null,
-        ingredients: []
-      };
       state.userOrder = null;
     }
   },
@@ -94,6 +91,10 @@ const userOrderSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.userOrder = action.payload.order;
+        state.constructorItems = {
+          bun: null,
+          ingredients: []
+        };
       });
   },
   selectors: {
