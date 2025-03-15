@@ -10,3 +10,5 @@ export const rootReducer = combineReducers({
   [ordersSlice.name]: ordersSlice.reducer,
   [userOrderSlice.name]: userOrderSlice.reducer
 });
+
+export default rootReducer;
