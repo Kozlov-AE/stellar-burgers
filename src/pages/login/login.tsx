@@ -1,10 +1,9 @@
 import { FC, SyntheticEvent, useState } from 'react';
 import { LoginUI } from '@ui-pages';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../services/store';
+import { AppDispatch } from '../../services/store';
 import { loginUser, userSelectors } from '../../services/slices/userSlice';
-import { TLoginData } from '@api';
-import { Navigate } from 'react-router-dom';
+import { TLoginData } from '../../utils/burger-api';
 
 export const Login: FC = () => {
   const [email, setEmail] = useState('');

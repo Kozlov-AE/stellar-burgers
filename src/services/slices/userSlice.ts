@@ -9,10 +9,9 @@ import {
   updateUserApi,
   getUserApi,
   logoutApi
-} from '@api';
+} from '../../utils/burger-api';
 
 import { deleteCookie, setCookie } from '../../utils/cookie';
-import { act } from 'react-dom/test-utils';
 
 export const registerUser = createAsyncThunk(
   'user/registerUser',
@@ -81,9 +80,7 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    userLogout: () => {
-      return initialState;
-    }
+    userLogout: () => initialState
   },
   extraReducers: (builder) => {
     builder
@@ -155,13 +152,13 @@ const userSlice = createSlice({
       .addCase(updateUser.fulfilled, (state, action) => {
         state.data = action.payload.user;
         state.loginUserError = null;
-        state.loginUserRequest = false;
+        state.loginUserRequest = true;
         state.isAuthenticated = true;
         state.isAuthChecked = true;
       })
 
       .addCase(logoutUser.pending, (state) => {
-        state.loginUserRequest;
+        state.loginUserRequest = true;
       })
       .addCase(logoutUser.rejected, (state, action) => {
         state.loginUserRequest = false;
