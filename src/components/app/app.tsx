@@ -43,6 +43,7 @@ const App = () => {
       <Routes location={background || location}>
         <Route path='*' element={<NotFound404 />} />
         <Route path='/' element={<ConstructorPage />} />
+        <Route path='/stellar-burgers/' element={<Feed />} />
         <Route path='/feed' element={<Feed />} />
         <Route
           path='/login'

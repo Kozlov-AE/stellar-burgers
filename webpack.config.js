@@ -54,7 +54,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html'
     }),
-    new Dotenv()
+    new Dotenv(),
+    new webpack.EnvironmentPlugin({
+      PUBLIC_PATH: null, // значение по умолчанию null, если переменная process.env.PUBLIC_PATH не передана
+      NODE_ENV: 'development', // значение по умолчанию 'development', если переменная process.env.NODE_ENV не передана
+    }),
   ],
   resolve: {
     extensions: [
