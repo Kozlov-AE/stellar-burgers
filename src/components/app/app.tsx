@@ -21,6 +21,7 @@ import { getIngredients } from '../../services/slices/ingredientsSlice';
 import { checkUserAuth } from '../../services/slices/userSlice';
 import { getOrders } from '../../services/slices/ordersSlice';
 import { IngredientDetailsUI } from '@ui';
+import { constrainedMemory } from 'process';
 
 const App = () => {
   const navigate = useNavigate();

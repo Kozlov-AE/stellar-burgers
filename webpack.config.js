@@ -83,6 +83,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, './dist'),
+    publicPath: process.env.PUBLIC_URL || '/stellar-burgers/',
     filename: 'bundle.js'
   },
   devServer: {
