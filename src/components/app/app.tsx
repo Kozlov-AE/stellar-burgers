@@ -20,7 +20,6 @@ import { useEffect } from 'react';
 import { getIngredients } from '../../services/slices/ingredientsSlice';
 import { checkUserAuth } from '../../services/slices/userSlice';
 import { getOrders } from '../../services/slices/ordersSlice';
-import { IngredientDetailsUI } from '@ui';
 
 const App = () => {
   const navigate = useNavigate();

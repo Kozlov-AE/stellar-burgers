@@ -1,7 +1,12 @@
 const path = require('path');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { DefinePlugin } = require('webpack');
 const Dotenv = require('dotenv-webpack');
+
+require('dotenv').config({
+  path: path.join(process.cwd(), '.env')
+});
 
 module.exports = {
   entry: path.resolve(__dirname, './src/index.tsx'),
@@ -54,7 +59,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html'
     }),
-    new Dotenv()
+    new DefinePlugin({
+      'process.env.PUBLIC_URL': JSON.stringify(process.env.PUBLIC_URL ?? '/'),
+      'process.env.BURGER_API_URL': JSON.stringify(process.env.BURGER_API_URL ?? '/'),
+    })
   ],
   resolve: {
     extensions: [
@@ -83,6 +91,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, './dist'),
+    publicPath: process.env.PUBLIC_URL || '/',
     filename: 'bundle.js'
   },
   devServer: {
@@ -92,3 +101,6 @@ module.exports = {
     port: 4000
   }
 };
+
+console.log(`BURGER_API_URL from .env file: ${process.env.BURGER_API_URL}`);
+console.log(`Path to .env file: ${path.join(process.cwd(), '.env')}`);
